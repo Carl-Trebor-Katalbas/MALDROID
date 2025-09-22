@@ -1,0 +1,54 @@
+CICMal2017 Dataset (29,999 datas)
+------------------------------------------
+APK Benign vs Malicious
+Extracted Features (mostly permissions)
+Malware Signature
+------------------------------------------
+-This dataset contains app metadata gaya ng App, Package, Category, Description, etc. and permission-based features examples are; Dangerous permissions count, Safe permissions count, and binary indicators for specific Android permissions.
+-Yung final column (Class) indicates kung yung APK is benign(0) or malicious(1).
+
+
+
+AMSF Dataset (5,019 datas)
+------------------------------------------
+Extracted Features (mostly API Calls)
+Malware Signature
+------------------------------------------
+-The dataset contains API call usage frequencies ng Android apps and each row corresponds sa mga apps tested.
+-Columns represent specific Android APIs or classes examples; android.app.Activity, android.util.Log.v.
+-Values indicate how many times an app invoked a given API.
+-Yung first column naman (class) indicates kung yung tested APK is benign(0) or malicious(1).
+
+
+
+
+DREBIN Dataset - Feature Identification (214 datas)
+------------------------------------------
+Extracted Features
+------------------------------------------
+-This dataset are only identification of each unique extracted feature [API Calls, Permissions, Intent] for the 2nd DREBIN Dataset.
+
+
+DREBIN Dataset - APK Signature (15,036 datas)
+------------------------------------------
+Extracted Features
+Malware Signature
+------------------------------------------
+-This dataset contains all of the DREBIN's tested APKs.
+-Columns represent all of extracted feature recorded on the 1st DREBIN Dataset.
+-Values indicate True/requested (1) or False/not requested (0).
+-Yung final column (class) indicates kung yung APK is benign(B) or malicious(S).
+
+
+
+
+AM Dataset (11,466 datas)
+-------------------------------------------
+Metainformation
+APK Benign vs Malicious
+Extracted Features (Permissions)
+Malware Signature
+-------------------------------------------
+-This dataset are metainformation like (eg. name, MD5, version, Min_SDK, Min_Screen, Min_OpenGL, Supported_CPU, Signature, Developer, Organization, Locality, Country, State, description, rating_number, rating_count.) of benign and malware Android App samples
+-Has some Permission features like (android.permission.INTERNET, android.permission.READ_SMS, android.permission.CAMERA, etc.) with values indicates as True/requested (1) or False/not requested (0).
+-Final column naman (LABEL) indicates benign (benignware) or malicious (malware).
