@@ -1,0 +1,9 @@
+flask
+flask-cors
+pandas
+numpy
+androguard
+fuzzywuzzy
+scikit-learn
+joblib
+gunicorn
