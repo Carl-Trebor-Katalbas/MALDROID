@@ -17,7 +17,7 @@ preprocessor = Preprocessor(
     scaler_path="model/malroid_scaler.pkl",
     pca_path="model/malroid_pca.pkl"
 )
-model = joblib.load("model/malroid_rf_model.pkl")
+model = joblib.load("model/malroid_knn_model.pkl")
 
 FEATURE_COLUMNS = [
     "SEND_SMS", "android.content.pm.Signature", "ACCESS_LOCATION_EXTRA_COMMANDS",
