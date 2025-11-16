@@ -71,6 +71,7 @@ def analyze():
     apk_path = None
     try:
         if 'apkFile' not in request.files:
+            print(f"Apk file missing")
             return jsonify({"error": "No APK file uploaded"}), 400
 
         apk_file = request.files['apkFile']
