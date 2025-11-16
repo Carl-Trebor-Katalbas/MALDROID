@@ -39,7 +39,12 @@ def create_simple_neural_network(X_train, y_train, feature_names, output_path):
     
     converter = tf.lite.TFLiteConverter.from_keras_model(model)
     converter.optimizations = [tf.lite.Optimize.DEFAULT]
+    converter.target_spec.supported_ops = [
+    tf.lite.OpsSet.TFLITE_BUILTINS,
+    tf.lite.OpsSet.SELECT_TF_OPS
+    ]
     
+    converter.allow_custom_ops = True
     tflite_model = converter.convert()
     
     # Save the model
@@ -78,7 +83,12 @@ def create_mobile_optimized_model(X_train, y_train, feature_names, output_path):
     # Convert with size optimization
     converter = tf.lite.TFLiteConverter.from_keras_model(mobile_model)
     converter.optimizations = [tf.lite.Optimize.OPTIMIZE_FOR_SIZE]
+    converter.target_spec.supported_ops = [
+    tf.lite.OpsSet.TFLITE_BUILTINS,
+    tf.lite.OpsSet.SELECT_TF_OPS
+    ]
     
+    converter.allow_custom_ops = True
     mobile_tflite = converter.convert()
     
     with open(output_path, 'wb') as f:
