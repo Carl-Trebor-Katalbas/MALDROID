@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_ethereal"
+    tools:context=".SettingsFragment">
+
+
+  <androidx.appcompat.widget.LinearLayoutCompat
+      android:id="@+id/linearLayoutCompat"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="top|center"
+      android:orientation="vertical"
+      android:padding="16dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.0"
+      tools:layout_editor_absoluteX="0dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lexenddeca_variablefont_wght"
+        android:gravity="center"
+        android:text="@string/settings"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="normal" />
+  </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+  <androidx.appcompat.widget.LinearLayoutCompat
+      android:id="@+id/linearLayoutCompat2"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="top|center"
+      android:orientation="vertical"
+      android:padding="16dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat"
+      app:layout_constraintVertical_bias="0.0">
+
+<!--    <Button-->
+<!--        android:id="@+id/scanOptions"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:background="@drawable/custom_button2"-->
+<!--        android:drawableStart="@drawable/outline_shield_24"-->
+<!--        android:fontFamily="@font/lexenddeca_variablefont_wght"-->
+<!--        android:text="@string/scan_options_text"-->
+<!--        android:textAlignment="textStart"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="16sp"-->
+<!--        android:textStyle="normal" />-->
+
+    <Button
+        android:id="@+id/privacy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_button2"
+        android:drawableStart="@drawable/outline_shield_24"
+        android:fontFamily="@font/lexenddeca_variablefont_wght"
+        android:text="@string/privacy_text2"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+  </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+  <androidx.cardview.widget.CardView
+      app:cardBackgroundColor="#80FFFFFF"
+      android:background="@drawable/navbar_bg"
+      android:id="@+id/aboutCard"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginHorizontal="18dp"
+      android:layout_marginTop="12dp"
+      app:cardCornerRadius="16dp"
+      app:cardElevation="0dp"
+      app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat2"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintVertical_bias="0.02">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/about"
+          android:fontFamily="@font/lexenddeca_variablefont_wght"
+          android:textColor="@color/black"
+          android:textSize="18sp"
+          android:textStyle="normal" />
+
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:fontFamily="@font/lexenddeca_variablefont_wght"
+          android:text="@string/about_text"
+          android:textColor="@color/black"
+          android:textSize="14sp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+  </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

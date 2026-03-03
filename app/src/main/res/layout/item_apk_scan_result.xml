@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="@android:color/transparent"
+    android:layout_marginBottom="8dp">
+
+    <!-- APK File Name -->
+    <TextView
+        android:id="@+id/appNameText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="APK File Name"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/lexenddeca_variablefont_wght"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Scan Result -->
+    <TextView
+        android:id="@+id/scanResultText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No risks found"
+        android:textColor="@color/green"
+        android:textSize="12sp"
+        android:fontFamily="@font/lexenddeca_variablefont_wght" />
+
+    <!-- Scan Date -->
+    <TextView
+        android:id="@+id/scanDateText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="02/24/23, 6:35 PM"
+        android:textColor="#666666"
+        android:textSize="12sp"
+        android:fontFamily="@font/lexenddeca_variablefont_wght"
+        android:layout_marginBottom="4dp" />
+
+</LinearLayout>

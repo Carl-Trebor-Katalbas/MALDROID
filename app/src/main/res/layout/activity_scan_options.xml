@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@drawable/background_ethereal">
+
+
+<!--    <ImageView-->
+<!--        android:id="@+id/backArrow"-->
+<!--        android:layout_width="24dp"-->
+<!--        android:layout_height="24dp"-->
+<!--        android:layout_marginTop="2dp"-->
+<!--        android:layout_marginEnd="105dp"-->
+<!--        android:layout_marginBottom="21dp"-->
+<!--        android:src="@drawable/outline_arrow_back_ios_24"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/cardScanOptions"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/scanTitle"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="1.0" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/scanTitle"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/scan_options_text"-->
+<!--        android:textSize="20sp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:fontFamily="@font/lexenddeca_variablefont_wght"-->
+<!--        android:textColor="@android:color/black"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"/>-->
+
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:id="@+id/cardScanOptions"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="300dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        app:cardCornerRadius="16dp"-->
+<!--        app:cardElevation="8dp"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/scanTitle"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            android:padding="16dp">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:gravity="center_vertical">-->
+
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="8dp"-->
+<!--                    android:text="@string/scan_options_text"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:fontFamily="@font/lexenddeca_variablefont_wght"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    app:drawableStartCompat="@drawable/outline_shield_24" />-->
+<!--            </LinearLayout>-->
+
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="12dp"-->
+<!--                android:text="@string/scan_mode"-->
+<!--                android:textSize="18sp"-->
+<!--                android:fontFamily="@font/lexenddeca_variablefont_wght"-->
+<!--                android:textColor="@color/black"/>-->
+<!--            <RadioGroup-->
+<!--                android:id="@+id/radioGroupScanMode"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical">-->
+
+<!--                <RadioButton-->
+<!--                    android:id="@+id/radioQuickScan"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:buttonTint="@color/black"-->
+<!--                    android:checked="true"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:fontFamily="@font/lexenddeca_variablefont_wght"-->
+<!--                    android:text="@string/quick_scan"-->
+<!--                    tools:ignore="TouchTargetSizeCheck" />-->
+
+<!--                <RadioButton-->
+<!--                    android:id="@+id/radioDeepScan"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:buttonTint="@color/black"-->
+<!--                    android:text="@string/deep_scan"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:fontFamily="@font/lexenddeca_variablefont_wght"-->
+<!--                    tools:ignore="TouchTargetSizeCheck" />-->
+<!--            </RadioGroup>-->
+
+<!--        </LinearLayout>-->
+
+<!--    </androidx.cardview.widget.CardView>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

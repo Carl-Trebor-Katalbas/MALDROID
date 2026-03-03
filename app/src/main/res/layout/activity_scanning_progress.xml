@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center"
+    android:background="@drawable/background_ethereal">
+
+    <TextView
+        android:id="@+id/scanTitleText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Scanning"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_marginBottom="32dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="@string/using_maldroid_ai_v1_model"
+        android:textColor="#666666"
+        android:textSize="16sp" />
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:gravity="center">
+
+        <View
+            android:id="@+id/pulseRing1"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/pulse_circle"
+            android:alpha="0" />
+
+        <View
+            android:id="@+id/pulseRing2"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/pulse_circle"
+            android:alpha="0" />
+
+        <ProgressBar
+            android:id="@+id/circularProgressBar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true"
+            android:progressDrawable="@drawable/circular_progress"
+            android:max="100"
+            android:progress="0"
+            android:rotation="-90" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/progressPercentageText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0%"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="24dp" />
+
+    <TextView
+        android:id="@+id/currentStepText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Initializing..."
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:lineSpacingExtra="4dp" />
+
+    <TextView
+        android:id="@+id/appNameText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Scanning: ..."
+        android:textSize="15sp"
+        android:textColor="#1976D2"
+        android:gravity="center"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="4dp"
+        android:layout_marginTop="8dp" />
+
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:id="@+id/cancel_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_button_red"
+        android:text="Cancel Scan"
+        android:fontFamily="@font/lexenddeca_variablefont_wght"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+</LinearLayout>
