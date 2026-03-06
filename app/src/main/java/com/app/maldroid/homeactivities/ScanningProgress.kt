@@ -324,7 +324,7 @@ class ScanningProgress : AppCompatActivity() {
 
         when (scanResult) {
             is ScanResult.Malicious -> {
-                resultText = "Malicious threat detected"
+                resultText = "Malicious"
                 isSafe = false
                 threatList = scanResult.detectedThreats.map { it.description }
             }
@@ -334,7 +334,7 @@ class ScanningProgress : AppCompatActivity() {
                 threatList = scanResult.warnings.map { it.description }
             }
             is ScanResult.Clean -> {
-                resultText = "Clean - No threats detected"
+                resultText = "Benign"
                 isSafe = true
                 triggerList = scanResult.triggers
             }

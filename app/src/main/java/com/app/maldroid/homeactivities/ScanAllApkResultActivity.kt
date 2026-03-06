@@ -1,6 +1,7 @@
 package com.app.maldroid.homeactivities
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -9,6 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.maldroid.R
 import com.app.maldroid.data.model.ScanResultItem
+import com.app.maldroid.data.model.ScanResult
+import com.app.maldroid.data.model.DetectedThreat
+import com.app.maldroid.data.model.ThreatType
+import com.app.maldroid.data.model.ThreatLevel
 
 class ScanAllApkResultActivity : AppCompatActivity() {
 
@@ -20,8 +25,12 @@ class ScanAllApkResultActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scan_all_apk_result)
-
-        val scannedItems = intent.getParcelableArrayListExtra<ScanResultItem>("SCAN_RESULTS") ?: arrayListOf()
+        val scannedItems: ArrayList<ScanResultItem> = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableArrayListExtra("SCAN_RESULTS", ScanResultItem::class.java) ?: arrayListOf()
+        } else {
+            @Suppress("DEPRECATION")
+            intent.getParcelableArrayListExtra("SCAN_RESULTS") ?: arrayListOf()
+        }
 
         initViews()
         setupRecyclerView(scannedItems)
@@ -51,7 +60,34 @@ class ScanAllApkResultActivity : AppCompatActivity() {
 
             val intent = Intent(this, targetActivity)
             intent.putExtra("FILE_NAME", clickedItem.appName)
-            intent.putExtra("SCAN_RESULT", clickedItem.fullScanResult)
+            val passedResult = clickedItem.fullScanResult
+
+            val finalResult = if (passedResult != null) {
+                passedResult
+            } else if (clickedItem.isSafe) {
+                ScanResult.Clean(
+                    confidence = 0.95f,
+                    notes = emptyList(),
+                    triggers = clickedItem.threatDetails ?: emptyList()
+                )
+            } else {
+                val reconstructedThreats = (clickedItem.threatDetails ?: emptyList()).map { threatString ->
+                    DetectedThreat(
+                        type = ThreatType.SUSPICIOUS_BEHAVIOR,
+                        severity = ThreatLevel.HIGH,
+                        description = threatString,
+                        details = "Detected during batch scan"
+                    )
+                }
+                ScanResult.Malicious(
+                    threatLevel = ThreatLevel.HIGH,
+                    confidence = 0.85f,
+                    detectedThreats = reconstructedThreats,
+                    recommendations = listOf("🚫 Uninstall Immediately", "⚠️ Check app permissions")
+                )
+            }
+
+            intent.putExtra("SCAN_RESULT", finalResult)
             intent.putExtra("PACKAGE_NAME", clickedItem.packageName)
             intent.putExtra("FILE_PATH", clickedItem.filePath)
             intent.putExtra("SCAN_DURATION", clickedItem.scanDuration)

@@ -126,18 +126,17 @@ class ScanAllApkActivity : AppCompatActivity() {
                             val confidence = scanResponse.confidence.toFloat()
                             val label = scanResponse.label ?: "Benign"
                             val triggers = scanResponse.triggers ?: emptyList()
-
-                            val isThreat = prediction == 1
                             val fullScanResult = createScanResult(prediction, confidence, label, file.name, triggers)
-
+                            val actuallySafe = fullScanResult is ScanResult.Clean
                             val uiItem = ScanResultItem(
                                 appName = file.name,
                                 scanTimestamp = System.currentTimeMillis(),
                                 scanResult = label,
-                                isSafe = !isThreat,
+                                isSafe = actuallySafe,
                                 packageName = "Unknown",
                                 filePath = file.absolutePath,
                                 scanDuration = duration,
+                                threatDetails = triggers,
                                 fullScanResult = fullScanResult
                             )
                             scannedItems.add(uiItem)
@@ -150,12 +149,27 @@ class ScanAllApkActivity : AppCompatActivity() {
                                 versionName = "1.0",
                                 versionCode = 1,
                                 scanTimestamp = System.currentTimeMillis(),
-                                isSafe = !isThreat,
+                                isSafe = actuallySafe,
                                 scanResult = label,
                                 permissions = triggers,
                                 scanDuration = duration
                             )
                             ScanDataManager.addApkScanResult(historyItem, this@ScanAllApkActivity)
+                        } else {
+                            val errorResult = ScanResult.Error(message = "API Error or Timeout")
+
+                            val uiItem = ScanResultItem(
+                                appName = file.name,
+                                scanTimestamp = System.currentTimeMillis(),
+                                scanResult = "Error",
+                                isSafe = false,
+                                packageName = "Unknown",
+                                filePath = file.absolutePath,
+                                scanDuration = duration,
+                                threatDetails = emptyList(),
+                                fullScanResult = errorResult
+                            )
+                            scannedItems.add(uiItem)
                         }
                     } catch (e: Exception) {
                         Log.e("ScanFileError", "Failed to scan ${file.name}: ${e.message}")

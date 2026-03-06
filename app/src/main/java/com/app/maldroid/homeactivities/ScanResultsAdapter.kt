@@ -24,8 +24,7 @@ class ScanResultsAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_scan_result, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_scan_all_apk, parent, false)
         return ViewHolder(view)
     }
 
