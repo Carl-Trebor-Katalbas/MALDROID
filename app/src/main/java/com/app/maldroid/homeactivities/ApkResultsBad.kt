@@ -75,6 +75,7 @@ class ApkResultsBad : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("UseKtx")
     private fun setupClickListeners() {
         val scanAgainBtn = findViewById<Button>(R.id.scanAgainBtn)
 
@@ -86,7 +87,7 @@ class ApkResultsBad : AppCompatActivity() {
 
         backButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
             startActivity(intent)
             finish()
         }
@@ -171,32 +172,36 @@ class ApkResultsBad : AppCompatActivity() {
     private fun displayScanResults() {
         val fileName = intent.getStringExtra("FILE_NAME") ?: "Unknown File"
         apkFileNameText.text = fileName
+        val scanResult = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getSerializableExtra("SCAN_RESULT", ScanResult::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            intent.getSerializableExtra("SCAN_RESULT") as? ScanResult
+        }
 
-        val serializableExtra = intent.getSerializableExtra("SCAN_RESULT")
-        when (serializableExtra) {
+        when (scanResult) {
             is ScanResult.Malicious -> {
                 maliciousAlertText.text = "MALICIOUS THREAT DETECTED"
                 maliciousAlertText.setTextColor(ContextCompat.getColor(this, R.color.red))
-
-                fun formatThreats(type: ThreatType): String {
-                    val items = serializableExtra.detectedThreats
+                fun formatThreats(type: ThreatType, result: ScanResult.Malicious): String {
+                    val items = result.detectedThreats
                         .filter { it.type == type }
                         .map { "• ${it.description}" }
-                    return if (items.isNotEmpty()) items.joinToString("\n") else "None Detected"
+                    return if (items.isNotEmpty()) items.joinToString("\n") else "• None Detected"
                 }
 
-                permissionsText.text = formatThreats(ThreatType.DANGEROUS_PERMISSIONS)
-                apiCallsText.text = formatThreats(ThreatType.SUSPICIOUS_BEHAVIOR)
-                codePatternsText.text = formatThreats(ThreatType.KNOWN_MALWARE)
-                networkLinksText.text = formatThreats(ThreatType.PRIVACY_RISK)
+                permissionsText.text = formatThreats(ThreatType.DANGEROUS_PERMISSIONS, scanResult)
+                apiCallsText.text = formatThreats(ThreatType.SUSPICIOUS_BEHAVIOR, scanResult)
+                codePatternsText.text = formatThreats(ThreatType.KNOWN_MALWARE, scanResult)
+                networkLinksText.text = formatThreats(ThreatType.PRIVACY_RISK, scanResult)
             }
 
             is ScanResult.Suspicious -> {
                 maliciousAlertText.text = "SUSPICIOUS APP"
                 maliciousAlertText.setTextColor(ContextCompat.getColor(this, R.color.orange))
-                val warnings = serializableExtra.warnings.joinToString("\n") { "• ${it.description}" }
+                val warnings = scanResult.warnings.joinToString("\n") { "• ${it.description}" }
 
-                permissionsText.text = warnings
+                permissionsText.text = warnings.ifEmpty { "• Review permissions" }
                 apiCallsText.text = "• Inconclusive patterns"
                 codePatternsText.text = "• Verify source manually"
                 networkLinksText.text = "• Review permissions"
@@ -206,20 +211,27 @@ class ApkResultsBad : AppCompatActivity() {
                 maliciousAlertText.text = "SCAN ERROR"
                 maliciousAlertText.setTextColor(ContextCompat.getColor(this, R.color.red))
 
-                permissionsText.text = "Error Message:\n${serializableExtra.message}"
+                permissionsText.text = "Error Message:\n${scanResult.message}"
                 codePatternsText.text = "Verify ProGuard rules"
                 networkLinksText.text = "Check Backend Logs"
+                apiCallsText.text = "--"
             }
 
             is ScanResult.Clean -> {
                 maliciousAlertText.text = "APP IS CLEAN"
                 maliciousAlertText.setTextColor(ContextCompat.getColor(this, R.color.green))
                 permissionsText.text = "No threats detected."
+                apiCallsText.text = "--"
+                codePatternsText.text = "--"
+                networkLinksText.text = "--"
             }
 
             else -> {
                 maliciousAlertText.text = "UNKNOWN RESULT"
-                permissionsText.text = "An unexpected error occurred."
+                permissionsText.text = "An unexpected error occurred reading the scan."
+                apiCallsText.text = "--"
+                codePatternsText.text = "--"
+                networkLinksText.text = "--"
             }
         }
     }

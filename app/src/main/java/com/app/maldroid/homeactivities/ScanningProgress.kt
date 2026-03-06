@@ -317,20 +317,30 @@ class ScanningProgress : AppCompatActivity() {
         val fileName = intent.getStringExtra("FILE_NAME") ?: "Unknown File"
         val filePath = intent.getStringExtra("FILE_PATH") ?: ""
 
-        val (resultText, isSafe, threatList) = when (scanResult) {
+        var resultText = ""
+        var isSafe = false
+        var threatList = emptyList<String>()
+        var triggerList = emptyList<String>()
+
+        when (scanResult) {
             is ScanResult.Malicious -> {
-                val names = scanResult.detectedThreats.map { it.description }
-                Triple("Malicious threat detected", false, names)
+                resultText = "Malicious threat detected"
+                isSafe = false
+                threatList = scanResult.detectedThreats.map { it.description }
             }
             is ScanResult.Suspicious -> {
-                val names = scanResult.warnings.map { it.description }
-                Triple("Suspicious activity detected", false, names)
+                resultText = "Suspicious activity detected"
+                isSafe = false
+                threatList = scanResult.warnings.map { it.description }
             }
             is ScanResult.Clean -> {
-                Triple("Clean - No threats detected", true, emptyList<String>())
+                resultText = "Clean - No threats detected"
+                isSafe = true
+                triggerList = scanResult.triggers
             }
             is ScanResult.Error -> {
-                Triple("Scan error: ${scanResult.message}", false, emptyList<String>())
+                resultText = "Scan error: ${scanResult.message}"
+                isSafe = false
             }
         }
 
@@ -341,7 +351,7 @@ class ScanningProgress : AppCompatActivity() {
             packageName = "N/A",
             versionName = "N/A",
             versionCode = 0,
-            permissions = emptyList(),
+            permissions = triggerList,
             scanTimestamp = System.currentTimeMillis(),
             scanResult = resultText,
             isSafe = isSafe,

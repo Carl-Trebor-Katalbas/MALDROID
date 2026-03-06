@@ -2,6 +2,7 @@ package com.app.maldroid.homeactivities
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
@@ -78,12 +79,17 @@ class ApkResultsAllGood : AppCompatActivity() {
         val fileName = intent.getStringExtra("FILE_NAME") ?: "Unknown File"
         apkFileNameText.text = fileName
 
-        val serializableExtra = intent.getSerializableExtra("SCAN_RESULT")
+        val scanResult = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getSerializableExtra("SCAN_RESULT", ScanResult::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            intent.getSerializableExtra("SCAN_RESULT") as? ScanResult
+        }
 
-        if (serializableExtra is ScanResult.Clean) {
+        if (scanResult is ScanResult.Clean) {
             scanSummaryText.text = "APK IS CLEAN"
             threatStatusText.text = "No threats detected in this APK"
-            categorizeAndDisplayTriggers(serializableExtra.triggers)
+            categorizeAndDisplayTriggers(scanResult.triggers)
 
         } else {
             val stringExtra = intent.getStringExtra("SCAN_RESULT")
