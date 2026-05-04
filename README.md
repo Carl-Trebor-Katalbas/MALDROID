@@ -14,21 +14,21 @@
 
 Development for MALDROID is **modularized across separate branches**, each focusing on a specific component of the system:
 
-* **`app` branch**
+* **`maldroid-app` branch**
   Contains the Android application built using **Android Studio (Kotlin)**.
 
   * User interface for scanning APKs
   * Features: *Scan APK*, *Scan All APK*, *Recent Scans*, and settings
   * Communicates with backend via REST API (Retrofit / OkHttp)
 
-* **`model` branch**
+* **`maldroid-model` branch**
   Hosts the **backend API and machine learning model**.
 
   * Built using **Flask**
   * Handles APK feature processing and prediction
   * Implements trained ML models (primarily Random Forest)
 
-* **`data-collection` branch**
+* **`maldroid-data` branch**
   Contains **Jupyter Notebooks** used for:
 
   * Dataset aggregation and preprocessing
